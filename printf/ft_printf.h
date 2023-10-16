@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 15:56:53 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/12 12:15:41 by ischmutz         ###   ########.fr       */
+/*   Created: 2023/10/12 12:25:52 by ischmutz          #+#    #+#             */
+/*   Updated: 2023/10/12 12:25:57 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-size_t	ft_strlen(const char *s)
-{
-	int	i;
+# include <unistd.h>
+# include <stdarg.h>
 
-	i = 0;
-	while (s[i] != 0)
-	{
-		i++;
-	}
-	return (i);
-}
+int		ft_printf(const char *fix, ...);
+int		ft_putchar(int c);
+int		ft_boringputnbr(long long longie, char *base);
+int		ft_putstr(char *str);
+int		ft_putptr(void *ptr);
+size_t	ft_strlen(const char *s);
+
+#endif

@@ -2,7 +2,7 @@ NAME = libftprintf.a
 
 COMPILER = cc
 
-FLAGS = -Wall -Werror -Wextra -I.
+FLAGS = -Wall -Werror -Wextra
 
 SRCS = ft_printf.c\
 ft_putchar.c\
@@ -19,7 +19,7 @@ $(NAME): $(OBJS)
 	ar -rcs $(NAME) $(OBJS)
 
 %.o: %.c
-	$(COMPILER) $(FLAGS) -c $< -o $@
+	$(COMPILER) $(FLAGS) -c $< -o $@ -I.
 
 clean:
 	rm -f $(OBJS)

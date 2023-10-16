@@ -6,26 +6,46 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:43:40 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/12 10:32:16 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/16 14:07:11 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
+
+static int	ft_unsignedputnbr(unsigned long int longie, char *base, int baselen)
+{
+	char	array[20];
+	int		i;
+	int		len;
+
+	len = 0;
+	i = 0;
+	while (longie > 0)
+	{
+		array[i++] = base[longie % baselen];
+		longie /= baselen;
+	}
+	i--;
+	len = i;
+	while (i >= 0)
+		write(1, &array[i--], 1);
+	return (len + 1);
+}
 
 int	ft_putptr(void *ptr)
 {
-	int					i;
-	unsigned long long	longptrkey;
+	unsigned long	longptrkey;
+	char			*base;
 
-	i = 0;
-	longptrkey = (unsigned long long) ptr;
+	longptrkey = (unsigned long) ptr;
+	base = "0123456789abcdef";
 	if (ptr == NULL)
-		return (write(1, "(nil)", 1));
+		return (write(1, "(nil)", 5));
 	write(1, "0x", 2);
-	return (ft_boringputnbr(longptrkey, "0123456789abcdef"));
+	return (ft_unsignedputnbr(longptrkey, base, ft_strlen(base)) + 2);
 }
 
-/*#include <unistd.h>
+/* #include <unistd.h>
 #include <stdio.h>
 int	main(void)
 {
@@ -33,7 +53,19 @@ int	main(void)
 	char	*filip = &c;
 	printf("original: %p\n", filip);
 	ft_putptr(filip);
-}*/
+}
+
+int	main(void)
+{
+	unsigned int	aba;
+
+	aba = 42;
+	int a= ft_printf("%d\n", -101);
+	ft_printf("return = %d\n", a);
+	a= printf("%d\n", -101);
+	printf("return = %d\n", a);
+	//printf("%X", aba);
+}  */
 
 //when you attempt to print a NULL pointer using the %p format specifier,
 //it will typically print "(nil)" or similar representation.

@@ -6,38 +6,38 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:31:41 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/11 18:44:59 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/16 13:54:48 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int	ft_violentputnbr(long long longie2, char *base2, int baselen)
+static int	ft_violentputnbr(long long longie2, char *base2, int baselen)
 {
 	char	array[20];
 	int		i;
 	int		len;
+	int		is_negative;
 
 	len = 0;
 	i = 0;
+	is_negative = 0;
 	if (longie2 < 0)
 	{
 		write(1, "-", 1);
 		longie2 = longie2 * (-1);
+		is_negative = 1;
 	}
 	while (longie2 > 0)
 	{
-		array[i] = base2[longie2 % baselen];
+		array[i++] = base2[longie2 % baselen];
 		longie2 /= baselen;
-		i++;
 	}
+	i--;
 	len = i;
 	while (i >= 0)
-	{
-		write(1, &array[i], 1);
-		i--;
-	}
-	return (len);
+		write(1, &array[i--], 1);
+	return (len + is_negative + 1);
 }
 
 int	ft_boringputnbr(long long longie, char *base)
@@ -47,41 +47,40 @@ int	ft_boringputnbr(long long longie, char *base)
 	return (ft_violentputnbr(longie, base, ft_strlen(base)));
 }
 
-/*int	main(void)
+// Artur's return value test:
+/* #include <stdio.h>
+int	main(void)
 {
-	int	aba;
+	unsigned int	aba;
 
-	aba = 0;
-	return (ft_boringputnbr(aba, "0123456789ABCDEF"));
+	aba = 42;
+	int a= ft_printf("%d\n", -101);
+	ft_printf("return = %d\n", a);
+	a= printf("%d\n", -101);
+	printf("return = %d\n", a);
+	//printf("%X", aba);
+} */
+
+/* learn this for exam
+void ft_real_expert(long long number, char *base, int base_nbr)
+{
+	if (number < 0)
+	{
+		number *= -1;
+		write(1, '-', 1);
+	}
+	ft_expert_putnbr(number, base, base_nbr);
+}
+
+void ft_expert_putnbr(long long number, char *base, int base_nbr)
+{
+	if (number >= base_nbr)
+		ft_expert_putnbr(number / base_nbr, base, base_nbr);
+	write(1, base[number % base_nbr], 1);
 }*/
 
 // convert hex: divide by 16, keep remainder, divide quotient until 0.
 // each remainder is a hex value
-
-/* Piscine putnbr
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-int	ft_putnbr(int nb)
-{
-	long	nb_long;
-
-	nb_long = (long) nb;
-	if (nb_long < 0)
-	{
-		ft_putchar('-');
-		nb_long = nb_long * (-1);
-	}
-	if (nb_long >= 0 && nb_long <= 9)
-		ft_putchar(nb_long + 48);
-	else if (nb_long >= 10)
-	{
-		ft_putnbr(nb_long / 10);
-		ft_putnbr(nb_long % 10);
-	}
-}*/
 
 /* Vorlesung's code lmao
 int	ft_shiupint(va_list liist)
@@ -107,6 +106,7 @@ int	ft_printd(va_list liist)
 	}
 	return (ft_strlen(output));
 }*/
+
 /* Fabian's explanation:
 void printf(char *format, ...)
 {
