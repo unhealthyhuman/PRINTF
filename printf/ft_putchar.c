@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:14:01 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/12 12:15:41 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:15:53 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	ft_putchar(int c)
 {
 	return (write(1, &c, 1));
 }
+
+//return funciona pq write returns el n° de bytes written.
 
 /*#include <stdio.h>
 

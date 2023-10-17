@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:24:57 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/13 18:50:12 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/16 16:14:00 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ int	ft_putstr(char *str)
 	return (i);
 }
 
-/*#include <stdio.h>
+/* #include <stdio.h>
 int	main(void)
 {
 	char	*mamawebo;
 	
 	mamawebo = "";
-	//ft_putstr(mamawebo);
-	printf("%s", mamawebo);
-}*/
+	ft_putstr(mamawebo);
+	//printf("%s", mamawebo);
+} */
 
 /*int	ft_printstr(va_list liist)
 {
